@@ -4,7 +4,7 @@ global $configuration;
 
 $configuration['pdoDriver']	= 'mysql';
 $configuration['db_encoding'] = 0;
-$configuration['db']	= 'gestion_incubateur';
+$configuration['db']	= 'gestion_absence';
 $configuration['host'] 	= 'localhost';
 $configuration['user'] 	= 'root';
 $configuration['pass']	= '';
@@ -15,19 +15,19 @@ $default['action'] = 'index';
 
 define ('DEVELOPMENT_ENVIRONMENT',true);
 define('MAX_FILE_SIZE', '3150000'); //3M
-define('BASE_PATH','http://localhost/gestion_incubateur/');
+define('BASE_PATH','http://localhost/GA-CMC5/');
 
 //VARIABLE PAR DEFAUT
-$title = "Gestion Incubateur CMC Agadir";
+$title = "Gestion Absences CMC Agadir";
 $description = "description";
-$societe = "Gestion Incubateur CMC Agadir";
+$societe = "Gestion Absences CMC Agadir";
 
 //VARIABLE MAIL
-define('USERNAME', 'salma.boukataya@ofppt.ma');
-define('FROM', 'salma.boukataya@ofppt.ma');
+define('USERNAME', '');
+define('FROM', '');
 define('PASSWORD', '8S6nWfV3c5');
 define('SMTPHOST', "ssl0.ovh.net");
 define('SMTPPORT', 25);
 // define('SMTPSECURE','TLS');
-define('MAILADMIN', 'salma.boukataya@ofppt.ma');
+define('MAILADMIN', '');
 define('TELADMIN', '02 02 02 02 02');
