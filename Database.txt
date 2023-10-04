@@ -1,0 +1,74 @@
+Tables :
+
+    Table absence:
+        id_absence (Clé primaire)
+        date_abs
+        heure_debut_abs
+        heure_fin_abs
+        total_heure_abs
+        id_stag (Clé étrangère vers la table stagiaire)
+        id_cours (Clé étrangère vers la table cours)
+        id_annee_formation (Clé étrangère vers la table annee_formation)
+        justif (boolean)
+
+    Table annee_formation:
+        id_annee_formation (Clé primaire)
+        annee_formation
+
+    Table cours:
+        id_cours (Clé primaire)
+        des_cours
+        id_formateur (Clé étrangère vers la table formateur)
+
+    Table filiere:
+        id_filiere (Clé primaire)
+        intitule_filiere
+        id_niveau (Clé étrangère vers la table niveau)
+
+    Table formateur:
+        id_formateur (Clé primaire)
+        nom_formateur
+
+    Table groupe:
+        id_groupe (Clé primaire)
+        intitule_groupe
+        id_filiere (Clé étrangère vers la table filiere)
+
+    Table justif:
+        id_justif (Clé primaire)
+        id_type_justif (Clé étrangère vers la table type_justif)
+        com_justif
+        id_absence (Clé étrangère vers la table absence)
+
+    Table niveau:
+        id_niveau (Clé primaire)
+        intitule_niveau
+
+    Table stagiaire:
+        id_stag (Clé primaire)
+        matricule_stag
+        nom_stag
+        prenom_stag
+        sexe_stag
+        cin_stag
+        date_naissance_stag
+        tel_stag
+        id_groupe (Clé étrangère vers la table groupe)
+        id_statut_stagiaire (Clé étrangère vers la table statut_stagiaire)
+
+    Table statut_stagiaire:
+        id_statut_stagiaire (Clé primaire)
+        intitule_statut_stagiaire
+
+    Table type_justif:
+        id_type_justif (Clé primaire)
+        des_type_justif
+
+Contraintes de clé étrangère :
+
+    La table absence a des clés étrangères id_stag, id_cours et id_annee_formation référençant respectivement les clés primaires des tables stagiaire, cours et annee_formation.
+    La table cours a une clé étrangère id_formateur référençant la clé primaire de la table formateur.
+    La table filiere a une clé étrangère id_niveau référençant la clé primaire de la table niveau.
+    La table groupe a une clé étrangère id_filiere référençant la clé primaire de la table filiere.
+    La table justif a des clés étrangères id_type_justif et id_absence référençant respectivement les clés primaires des tables type_justif et absence.
+    La table stagiaire a des clés étrangères id_groupe et id_statut_stagiaire référençant respectivement les clés primaires des tables groupe et statut_stagiaire.
