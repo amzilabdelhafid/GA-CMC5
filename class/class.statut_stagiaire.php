@@ -3,8 +3,8 @@
 	This SQL query will create the table to store your object.
 
 	CREATE TABLE `statut_stagiaire` (
-	`id_stat` int(11) NOT NULL auto_increment,
-	`libelle_stat` VARCHAR(255) NOT NULL, PRIMARY KEY  (`id_stat`)) ENGINE=MyISAM;
+	`id_statut_stagiaire` int(11) NOT NULL auto_increment,
+	`libelle_stat` VARCHAR(255) NOT NULL, PRIMARY KEY  (`id_statut_stagiaire`)) ENGINE=MyISAM;
 */
 
 /**
@@ -18,7 +18,7 @@
 include_once('class.pog_base.php');
 class statut_stagiaire extends POG_Base
 {
-    public $id_stat = '';
+    public $id_statut_stagiaire = '';
 
     /**
      * @var VARCHAR(255)
@@ -28,7 +28,7 @@ class statut_stagiaire extends POG_Base
     
 
     public $pog_attribute_type = array(
-        "id_stat" => array('db_attributes' => array("NUMERIC", "INT")),
+        "id_statut_stagiaire" => array('db_attributes' => array("NUMERIC", "INT")),
         "libelle_stat" => array('db_attributes' => array("TEXT", "VARCHAR", "255")),
        
     );
@@ -59,17 +59,17 @@ class statut_stagiaire extends POG_Base
 
     /**
      * Gets object from database
-     * @param integer $id_stat
+     * @param integer $id_statut_stagiaire
      * @return object $statut_stagiaire
      */
-    function Get($id_stat)
+    function Get($id_statut_stagiaire)
     {
         $connection = Database::Connect();
-        $this->pog_query = "select * from `statut_stagiaire` where `id_stat`='".intval($id_stat)."' LIMIT 1";
+        $this->pog_query = "select * from `statut_stagiaire` where `id_statut_stagiaire`='".intval($id_statut_stagiaire)."' LIMIT 1";
         $cursor = Database::Reader($this->pog_query, $connection);
         while ($row = Database::Read($cursor))
         {
-            $this->id_stat = $row['id_stat'];
+            $this->id_statut_stagiaire = $row['id_statut_stagiaire'];
             $this->libelle_stat = $this->Unescape($row['libelle_stat']);
             
         }
@@ -148,7 +148,7 @@ class statut_stagiaire extends POG_Base
         }
         else
         {
-            $sortBy = "id_stat";
+            $sortBy = "id_statut_stagiaire";
         }
         $this->pog_query .= " order by ".$sortBy." ".($ascending ? "asc" : "desc")." $sqlLimit";
         $thisObjectName = get_class($this);
@@ -156,7 +156,7 @@ class statut_stagiaire extends POG_Base
         while ($row = Database::Read($cursor))
         {
             $statut_stagiaire = new $thisObjectName();
-            $statut_stagiaire->id_stat = $row['id_stat'];
+            $statut_stagiaire->id_statut_stagiaire = $row['id_statut_stagiaire'];
             $statut_stagiaire->libelle_stat = $this->Unescape($row['libelle_stat']);
             
             $statut_stagiaireList[] = $statut_stagiaire;
@@ -167,20 +167,20 @@ class statut_stagiaire extends POG_Base
 
     /**
      * Saves the object to the database
-     * @return integer $id_stat
+     * @return integer $id_statut_stagiaire
      */
     function Save()
     {
         $connection = Database::Connect();
         $rows = 0;
-        if ($this->id_stat!=''){
-            $this->pog_query = "select `id_stat` from `statut_stagiaire` where `id_stat`='".$this->id_stat."' LIMIT 1";
+        if ($this->id_statut_stagiaire!=''){
+            $this->pog_query = "select `id_statut_stagiaire` from `statut_stagiaire` where `id_statut_stagiaire`='".$this->id_statut_stagiaire."' LIMIT 1";
             $rows = Database::Query($this->pog_query, $connection);
         }
         if ($rows > 0)
         {
             $this->pog_query = "update `statut_stagiaire` set 
-						`libelle_stat`='".$this->Escape($this->libelle_stat)."' where `id_stat`='".$this->id_stat."'";
+						`libelle_stat`='".$this->Escape($this->libelle_stat)."' where `id_statut_stagiaire`='".$this->id_statut_stagiaire."'";
         }
         else
         {
@@ -188,21 +188,21 @@ class statut_stagiaire extends POG_Base
 			'".$this->Escape($this->libelle_stat)."' )";
         }
         $insertId = Database::InsertOrUpdate($this->pog_query, $connection);
-        if ($this->id_stat == "")
+        if ($this->id_statut_stagiaire == "")
         {
-            $this->id_stat = $insertId;
+            $this->id_statut_stagiaire = $insertId;
         }
-        return $this->id_stat;
+        return $this->id_statut_stagiaire;
     }
 
 
     /**
      * Clones the object and saves it to the database
-     * @return integer $id_stat
+     * @return integer $id_statut_stagiaire
      */
     function SaveNew()
     {
-        $this->id_stat = '';
+        $this->id_statut_stagiaire = '';
         return $this->Save();
     }
 
@@ -214,7 +214,7 @@ class statut_stagiaire extends POG_Base
     function Delete()
     {
         $connection = Database::Connect();
-        $this->pog_query = "delete from `statut_stagiaire` where `id_stat`='".$this->id_stat."'";
+        $this->pog_query = "delete from `statut_stagiaire` where `id_statut_stagiaire`='".$this->id_statut_stagiaire."'";
 		
         return Database::NonQuery($this->pog_query, $connection);
     }

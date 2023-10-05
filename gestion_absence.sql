@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `cours` (
 
 CREATE TABLE IF NOT EXISTS `filiere` (
   `id_filiere` int(11) NOT NULL AUTO_INCREMENT,
-  `intitule_filiere` varchar(255) NOT NULL,
+  `libelle_filiere` varchar(255) NOT NULL,
   `id_niveau` int(11) NOT NULL,
   PRIMARY KEY (`id_filiere`),
   KEY `id_niveau` (`id_niveau`)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `formateur` (
 
 CREATE TABLE IF NOT EXISTS `groupe` (
   `id_groupe` int(11) NOT NULL AUTO_INCREMENT,
-  `intitule_groupe` varchar(255) NOT NULL,
+  `libelle_groupe` varchar(255) NOT NULL,
   `id_filiere` int(11) NOT NULL,
   PRIMARY KEY (`id_groupe`),
   KEY `id_filiere` (`id_filiere`)
@@ -150,12 +150,13 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
   `matricule_stag` varchar(255) NOT NULL,
   `nom_stag` varchar(255) NOT NULL,
   `prenom_stag` varchar(255) NOT NULL,
-  `sexe_stag` varchar(10) NOT NULL,
+  `civilite_stag` varchar(10) NOT NULL,
   `cin_stag` varchar(100) NOT NULL,
   `date_naissance_stag` int(11) NOT NULL,
   `tel_stag` varchar(255) NOT NULL,
   `id_groupe` int(11) NOT NULL,
   `id_statut_stagiaire` int(11) NOT NULL,
+  `com_stag` text NOT NULL,
   PRIMARY KEY (`id_stag`),
   KEY `id_statut_stagiaire` (`id_statut_stagiaire`),
   KEY `id_groupe` (`id_groupe`)
@@ -169,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
 
 CREATE TABLE IF NOT EXISTS `statut_stagiaire` (
   `id_statut_stagiaire` int(11) NOT NULL AUTO_INCREMENT,
-  `intitule_statut_stagiaire` varchar(255) NOT NULL,
+  `libelle_stat` varchar(255) NOT NULL,
   PRIMARY KEY (`id_statut_stagiaire`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

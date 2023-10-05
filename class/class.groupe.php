@@ -5,9 +5,7 @@
 	CREATE TABLE `groupe` (
 	`id_groupe` int(11) NOT NULL auto_increment,
 	`libelle_groupe` VARCHAR(255) NOT NULL,
-	`annee_formation` VARCHAR(255) NOT NULL,
-	`niveau_formation` VARCHAR(255) NOT NULL,
-	 	
+	
 	`id_filiere` int(11) NOT NULL, INDEX(`id_filiere`), PRIMARY KEY  (`id_groupe`)) ENGINE=MyISAM;
 */
 
@@ -28,21 +26,8 @@ class groupe extends POG_Base
 	/**
 	 * @var VARCHAR(255)
 	 */
-	public $code_diplome;
-	/**
-	 * @var VARCHAR(255)
-	 */
 	public $libelle_groupe;
 	
-	/**
-	 * @var VARCHAR(255)
-	 */
-	public $annee_formation;
-	
-	/**
-	 * @var VARCHAR(255)
-	 */
-	public $niveau_formation;
 	
 	/**
 	 * @var INT(11)
@@ -51,10 +36,7 @@ class groupe extends POG_Base
 	
 	public $pog_attribute_type = array(
 		"id_groupe" => array('db_attributes' => array("NUMERIC", "INT")),
-		"code_diplome" => array('db_attributes' => array("TEXT", "VARCHAR", "255")),
 		"libelle_groupe" => array('db_attributes' => array("TEXT", "VARCHAR", "255")),
-		"annee_formation" => array('db_attributes' => array("TEXT", "VARCHAR", "255")),
-		"niveau_formation" => array('db_attributes' => array("TEXT", "VARCHAR", "255")),
 		"filiere" => array('db_attributes' => array("OBJECT", "BELONGSTO")),
 		);
 	public $pog_query;
@@ -76,12 +58,11 @@ class groupe extends POG_Base
 		}
 	}
 	
-	function __construct($code_diplome='',$libelle_groupe='', $annee_formation='', $niveau_formation='')
+	function __construct($libelle_groupe='')
 	{
-		$this->code_diplome = $code_diplome;
+		
 		$this->libelle_groupe = $libelle_groupe;
-		$this->annee_formation = $annee_formation;
-		$this->niveau_formation = $niveau_formation;
+		
 	}
 	
 	
@@ -98,10 +79,7 @@ class groupe extends POG_Base
 		while ($row = Database::Read($cursor))
 		{
 			$this->id_groupe = $row['id_groupe'];
-			$this->code_diplome = $this->Unescape($row['code_diplome']);
 			$this->libelle_groupe = $this->Unescape($row['libelle_groupe']);
-			$this->annee_formation = $this->Unescape($row['annee_formation']);
-			$this->niveau_formation = $this->Unescape($row['niveau_formation']);
 			$this->id_filiere = $row['id_filiere'];
 		}
 		return $this;
@@ -188,10 +166,7 @@ class groupe extends POG_Base
 		{
 			$groupe = new $thisObjectName();
 			$groupe->id_groupe = $row['id_groupe'];
-			$groupe->code_diplome = $this->Unescape($row['code_diplome']);
 			$groupe->libelle_groupe = $this->Unescape($row['libelle_groupe']);
-			$groupe->annee_formation = $this->Unescape($row['annee_formation']);
-			$groupe->niveau_formation = $this->Unescape($row['niveau_formation']);
 			$groupe->id_filiere = $row['id_filiere'];
 			$groupeList[] = $groupe;
 		}
@@ -214,19 +189,17 @@ class groupe extends POG_Base
 		if ($rows > 0)
 		{
 			$this->pog_query = "update `groupe` set 
-			`code_diplome`='".$this->Escape($this->code_diplome)."', 
+			
 			`libelle_groupe`='".$this->Escape($this->libelle_groupe)."', 
-			`annee_formation`='".$this->Escape($this->annee_formation)."', 
-			`niveau_formation`='".$this->Escape($this->niveau_formation)."', 
+			
 			`id_filiere`='".$this->id_filiere."' where `id_groupe`='".$this->id_groupe."'";
 		}
 		else
 		{
-			$this->pog_query = "insert into `groupe` (`code_diplome`,`libelle_groupe`, `annee_formation`, `niveau_formation`, `id_filiere` ) values (
-			'".$this->Escape($this->code_diplome)."', 
+			$this->pog_query = "insert into `groupe` (`libelle_groupe`, `id_filiere` ) values (
+			
 			'".$this->Escape($this->libelle_groupe)."', 
-			'".$this->Escape($this->annee_formation)."', 
-			'".$this->Escape($this->niveau_formation)."', 
+			
 			'".$this->id_filiere."' )";
 		}
 		$insertId = Database::InsertOrUpdate($this->pog_query, $connection);
