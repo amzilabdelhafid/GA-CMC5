@@ -5,7 +5,7 @@ session_start();
 // session_regenerate_id();
 
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', dirname(dirname(__FILE__)).'/gestion_incubateur');
+define('ROOT', dirname(dirname(__FILE__)).'/GA-CMC5');
 
 
 
