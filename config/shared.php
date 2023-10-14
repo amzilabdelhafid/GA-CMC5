@@ -41,7 +41,16 @@ function filter($chaine)
     return strtolower($chaine);
 }
 
-function __autoload($className) {
+// function __autoload($className) {
+// 	if (file_exists(ROOT . DS . '../GA-CMC5-adm' . DS . 'class' . DS . 'class.' . strtolower($className) . '.php')) {
+// 		require_once(ROOT . DS . '../GA-CMC5-adm' . DS . 'class' . DS . 'class.' . strtolower($className) . '.php');
+// 	} else {
+// 		/* Error Generation Code Here */
+// 		print_r('Erreur de chargement de la classe');
+// 	}
+// }	
+
+function spl_autoload($className) {
 	if (file_exists(ROOT . DS . '../GA-CMC5-adm' . DS . 'class' . DS . 'class.' . strtolower($className) . '.php')) {
 		require_once(ROOT . DS . '../GA-CMC5-adm' . DS . 'class' . DS . 'class.' . strtolower($className) . '.php');
 	} else {
@@ -49,6 +58,8 @@ function __autoload($className) {
 		print_r('Erreur de chargement de la classe');
 	}
 }
+
+
 
 /** Main Call Function **/
 function callHook() { 
